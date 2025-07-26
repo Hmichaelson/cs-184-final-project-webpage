@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>[Your Project Name] – CS184 Project Proposal</title>
+    <title>Transformer-Powered Perceptual Assistant – CS184 Project Proposal</title>
     <style>
         :root {
             --bg-color: #121212;
@@ -115,6 +115,15 @@
             margin-top: 1rem;
         }
 
+        .top-image {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin: 2rem auto;
+            border-radius: var(--border-radius);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+        }
+
         @media (max-width: 600px) {
             header h1 {
                 font-size: 2rem;
@@ -134,6 +143,9 @@
 </header>
 
 <main>
+    <!-- INSERT IMAGE HERE -->
+    <img src="demo_project_image.jpg" alt="Sample output of attention-based image enhancement" class="top-image"/>
+
     <section id="summary">
         <h2>Summary and Team Members</h2>
         <p><strong>Project Summary:</strong> We want to use pre-trained attention models (the CLIP model from OpenAI) to
@@ -149,13 +161,11 @@
             gestures, and salient objects—while filtering out less relevant details like background textures. For
             instance, when viewing a person standing next to a wall, our attention is instinctively drawn to the
             person's face and body language, not the fine details of the wall. This selective focus is a cognitive
-            adaptation that helps us process visual information more efficiently.
-
-            Traditional approaches to mimic this behavior in image processing often rely on depth-of-field techniques
+            adaptation that helps us process visual information more efficiently.</p>
+        <p>Traditional approaches to mimic this behavior in image processing often rely on depth-of-field techniques
             that apply blurring based on camera metadata, such as depth maps or focal information. However, most images
-            available online lack this metadata, limiting the applicability of such methods.
-
-            Our goal is to explore whether we can replicate this perceptual enhancement—selectively sharpening and
+            available online lack this metadata, limiting the applicability of such methods.</p>
+        <p>Our goal is to explore whether we can replicate this perceptual enhancement—selectively sharpening and
             blurring image regions—without requiring explicit depth information. By leveraging pre-trained
             attention-based models, such as Vision Transformers (ViTs), we aim to identify which regions of an image are
             most semantically important. We will then apply targeted image processing techniques, such as sharpening or
@@ -168,7 +178,7 @@
             <h3>Planned Deliverables</h3>
             <p>We plan to deliver a number of images from different domains showcasing how a generic, ML-based,
                 depth-of-field model could enhance existing images. We would like to create a wide range of images and
-                identify domains where this approach does prove beneficial.</p>
+                identify domains where this approach proves most beneficial.</p>
         </div>
         <div class="subsection">
             <h3>Hoped-for Deliverables</h3>
@@ -180,19 +190,10 @@
     <section id="schedule">
         <h2>Schedule</h2>
         <ul>
-            <li><strong>Week 1:</strong> Over the first week we want to identify the pre-trained models that we plan to
-                use and we want to build a simple visual pipeline to process images.
-            </li>
-            <li><strong>Week 2:</strong> Over the second week we want to strengthen our pipeline and process a wide
-                variety of images. Ideally we would create some hierarchy of models so that we can adjust which model we
-                are using based on the image domain.
-            </li>
-            <li><strong>Week 3:</strong> Over the third week we want to finalize our project and create our final image
-                deliverables
-            </li>
-            <li><strong>Week 4:</strong> Over the fourth week we want to ideally render out a full scene using our model
-                and add some type of temporal attention map.
-            </li>
+            <li><strong>Week 1:</strong> Identify pre-trained models and build a basic image processing pipeline.</li>
+            <li><strong>Week 2:</strong> Expand pipeline and test on a wide variety of images, possibly selecting models based on image domain.</li>
+            <li><strong>Week 3:</strong> Finalize image results and presentation deliverables.</li>
+            <li><strong>Week 4:</strong> (Stretch Goal) Extend to video: render a full scene with temporal attention effects.</li>
         </ul>
     </section>
 
@@ -212,4 +213,4 @@
 </footer>
 
 </body>
-</html></html>
+</html>
