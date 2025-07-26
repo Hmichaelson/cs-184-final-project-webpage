@@ -1,86 +1,179 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-	<style>
-			h1 {
-				text-align: center;
-			}
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>[Your Project Name] – CS184 Project Proposal</title>
+  <style>
+    /* Global styles */
+    :root {
+      --bg-color: #121212;
+      --surface-color: #1e1e1e;
+      --accent-color: #4db6ac;
+      --text-color: #f1f1f1;
+      --muted-color: #aaaaaa;
+      --highlight: #81d4fa;
+      --border-radius: 10px;
+    }
 
-			.container {
-				margin: 0 auto;
-				padding: 60px 20%;
-			}
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-			figure {
-				text-align: center;
-			}
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      padding-bottom: 3rem;
+    }
 
-			img {
-				display: inline-block;
-			}
+    header {
+      background: linear-gradient(135deg, #263238, #1c1c1c);
+      padding: 3rem 1.5rem;
+      text-align: center;
+      border-bottom: 2px solid #333;
+    }
 
-			body {
-				font-family: 'Inter', sans-serif;
-				line-height: 1.4;
-				color: #32323a;
-				background-color: #ffffff;
-				display: flex;
-				flex-direction: column;
-				justify-content: center;
-				align-items: center;
-				width: 40%;
-				height: 100%;
-				margin: 0;
-				position: absolute;
-				left: 50%;
-				transform: translateX(-50%);
-			}
+    header h1 {
+      font-size: 2.8rem;
+      color: var(--accent-color);
+      margin-bottom: 0.5rem;
+    }
 
-		@media (max-width: 600px) {
-			body {
-				width: 100%;
-				left: 0;
-				transform: none;
-			}
-		}
+    header p {
+      font-size: 1.1rem;
+      color: var(--muted-color);
+    }
 
-		a {
-			text-decoration: none;
-			color: #0057A8;
-		}
+    main {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
 
-		a:hover {
-			color: #8E018E !important;
-			text-decoration: underline;
-		}
-	</style>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CS184/284A Homework Webpages</title>
-	</head>
-	<body>
-		<div class="wrapper">
-			<header>
-				<h1 style="align-self:flex-end;">CS184/284A Homework Webpages</h1>
-			</header>
-			<main>
-				<div class="content">
-					<ul>
-						<li><a href="/finalproject/index.html">Final Project</a></li>
-					</ul>
-				</div>
-			</main>
-		</div>
-	</body>
-	<script>
-		var links = document.body.getElementsByTagName("a")
-		var a = window.location.href.indexOf(".io")
-		var repo_name = window.location.href.substring(a+3)
-		for(var i = 0; i < links.length; i++){
-			var link = links[i]
-			var actual_name = link.href.substring(link.href.indexOf(".io")+4)
-			link.href = repo_name + actual_name
-		}
-	</script>
+    section {
+      background-color: var(--surface-color);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      border-radius: var(--border-radius);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      transition: background-color 0.3s ease;
+    }
+
+    section:hover {
+      background-color: #2a2a2a;
+    }
+
+    section h2 {
+      border-left: 4px solid var(--accent-color);
+      padding-left: 1rem;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--highlight);
+    }
+
+    section h3 {
+      font-size: 1.1rem;
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+      color: var(--accent-color);
+    }
+
+    ul {
+      padding-left: 1.5rem;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    a {
+      color: var(--highlight);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      padding-top: 2rem;
+      color: var(--muted-color);
+    }
+
+    .subsection {
+      margin-top: 1rem;
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2rem;
+      }
+
+      section h2 {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>[Your Project Name]</h1>
+    <p>A CS184 Final Project Proposal</p>
+  </header>
+
+  <main>
+    <section id="summary">
+      <h2>Summary and Team Members</h2>
+      <p><strong>Project Summary:</strong> [2–3 sentence summary of your idea]</p>
+      <p><strong>Team Members:</strong> [Name 1], [Name 2], [Name 3], [Name 4]</p>
+    </section>
+
+    <section id="problem">
+      <h2>Problem Description</h2>
+      <p>[Describe the problem you're trying to solve, its context, importance, and why it’s challenging. Include a high-level strategy for solving it.]</p>
+    </section>
+
+    <section id="goals">
+      <h2>Goals and Deliverables</h2>
+      <div class="subsection">
+        <h3>Planned Deliverables</h3>
+        <p>[What you expect to successfully complete: images, demos, performance metrics, etc.]</p>
+      </div>
+      <div class="subsection">
+        <h3>Hoped-for Deliverables</h3>
+        <p>[Aspirational outcomes if things go well: stretch goals or advanced features.]</p>
+      </div>
+    </section>
+
+    <section id="schedule">
+      <h2>Schedule</h2>
+      <ul>
+        <li><strong>Week 1:</strong> [Task descriptions]</li>
+        <li><strong>Week 2:</strong> [Task descriptions]</li>
+        <li><strong>Week 3:</strong> [Task descriptions]</li>
+        <li><strong>Week 4:</strong> [Task descriptions]</li>
+      </ul>
+    </section>
+
+    <section id="resources">
+      <h2>Resources</h2>
+      <p><strong>References:</strong> [Books, papers, websites]</p>
+      <p><strong>Platform & Tools:</strong> [Programming languages, frameworks, hardware, etc.]</p>
+      <p><strong>Existing Code:</strong> [Links or descriptions of any base code used]</p>
+    </section>
+  </main>
+
+  <footer>
+    CS184/284A – University of California, Berkeley
+  </footer>
+
+</body>
 </html>
