@@ -1,186 +1,215 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>[Your Project Name] – CS184 Project Proposal</title>
-  <style>
-    :root {
-      --bg-color: #121212;
-      --surface-color: #1e1e1e;
-      --accent-color: #00ff88;     /* coder green */
-      --text-color: #f1f1f1;
-      --muted-color: #aaaaaa;
-      --highlight: #39c5bb;        /* tech teal */
-      --border-radius: 10px;
-    }
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>[Your Project Name] – CS184 Project Proposal</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --surface-color: #1e1e1e;
+            --accent-color: #00ff88; /* coder green */
+            --text-color: #f1f1f1;
+            --muted-color: #aaaaaa;
+            --highlight: #c5a739; /* tech teal */
+            --border-radius: 10px;
+        }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      line-height: 1.6;
-      padding-bottom: 3rem;
-    }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding-bottom: 3rem;
+        }
 
-    header {
-      background: linear-gradient(135deg, #263238, #1c1c1c);
-      padding: 3rem 1.5rem;
-      text-align: center;
-      border-bottom: 2px solid #333;
-    }
+        header {
+            background: linear-gradient(135deg, #263238, #1c1c1c);
+            padding: 3rem 1.5rem;
+            text-align: center;
+            border-bottom: 2px solid #333;
+        }
 
-    header h1 {
-      font-size: 2.8rem;
-      color: var(--accent-color);
-      margin-bottom: 0.5rem;
-    }
+        header h1 {
+            font-size: 2.8rem;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
 
-    header p {
-      font-size: 1.1rem;
-      color: var(--muted-color);
-    }
+        header p {
+            font-size: 1.1rem;
+            color: var(--muted-color);
+        }
 
-    main {
-      max-width: 900px;
-      margin: 2rem auto;
-      padding: 0 1.5rem;
-    }
+        main {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
 
-    section {
-      background-color: var(--surface-color);
-      padding: 2rem;
-      margin-bottom: 2rem;
-      border-radius: var(--border-radius);
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-      transition: background-color 0.3s ease;
-    }
+        section {
+            background-color: var(--surface-color);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s ease;
+        }
 
-    section:hover {
-      background-color: #2a2a2a;
-    }
+        section:hover {
+            background-color: #2a2a2a;
+        }
 
-    section h2 {
-      border-left: 4px solid var(--accent-color);
-      padding-left: 1rem;
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-      color: var(--highlight);
-    }
+        section h2 {
+            border-left: 4px solid var(--accent-color);
+            padding-left: 1rem;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--highlight);
+        }
 
-    section h3 {
-      font-size: 1.1rem;
-      margin-top: 1rem;
-      margin-bottom: 0.5rem;
-      color: var(--accent-color);
-    }
+        section h3 {
+            font-size: 1.1rem;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent-color);
+        }
 
-    ul {
-      padding-left: 1.5rem;
-    }
+        ul {
+            padding-left: 1.5rem;
+        }
 
-    li {
-      margin-bottom: 0.5rem;
-    }
+        li {
+            margin-bottom: 0.5rem;
+        }
 
-    a {
-      color: var(--highlight);
-      text-decoration: none;
-    }
+        a {
+            color: var(--highlight);
+            text-decoration: none;
+        }
 
-    a:hover {
-      text-decoration: underline;
-    }
+        a:hover {
+            text-decoration: underline;
+        }
 
-    footer {
-      text-align: center;
-      font-size: 0.9rem;
-      padding-top: 2rem;
-      color: var(--muted-color);
-    }
+        footer {
+            text-align: center;
+            font-size: 0.9rem;
+            padding-top: 2rem;
+            color: var(--muted-color);
+        }
 
-    footer p:last-child {
-      font-size: 0.8rem;
-      margin-top: 0.5rem;
-      color: #666;
-    }
+        footer p:last-child {
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+            color: #666;
+        }
 
-    .subsection {
-      margin-top: 1rem;
-    }
+        .subsection {
+            margin-top: 1rem;
+        }
 
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 2rem;
-      }
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 2rem;
+            }
 
-      section h2 {
-        font-size: 1.3rem;
-      }
-    }
-  </style>
+            section h2 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
 </head>
 <body>
 
-  <header>
-    <h1>[Your Project Name]</h1>
+<header>
+    <h1>Transformer-Powered Perceptual Assistant</h1>
     <p>A CS184 Final Project Proposal</p>
-  </header>
+</header>
 
-  <main>
+<main>
     <section id="summary">
-      <h2>Summary and Team Members</h2>
-      <p><strong>Project Summary:</strong> [2–3 sentence summary of your idea]</p>
-      <p><strong>Team Members:</strong> [Name 1], [Name 2], [Name 3], [Name 4]</p>
+        <h2>Summary and Team Members</h2>
+        <p><strong>Project Summary:</strong> We want to use pre-trained attention models (the CLIP model from OpenAI) to
+            understand where the salient features are of some images. We then want to build a heatmap of given images
+            and know which areas we need to blur / enhance. We then want to apply the relevant image processing
+            techniques to 'treat' the final image so it is optimized for human perception.</p>
+        <p><strong>Team Members:</strong> Eduardo Cortes, Yuhe Qin, Zhehao Yang, and Henry Michaelson</p>
     </section>
 
     <section id="problem">
-      <h2>Problem Description</h2>
-      <p>[Describe the problem you're trying to solve, its context, importance, and why it’s challenging. Include a high-level strategy for solving it.]</p>
+        <h2>Problem Description</h2>
+        <p>Human perception is naturally attuned to focus on semantically important regions of an image—such as faces,
+            gestures, and salient objects—while filtering out less relevant details like background textures. For
+            instance, when viewing a person standing next to a wall, our attention is instinctively drawn to the
+            person's face and body language, not the fine details of the wall. This selective focus is a cognitive
+            adaptation that helps us process visual information more efficiently.
+
+            Traditional approaches to mimic this behavior in image processing often rely on depth-of-field techniques
+            that apply blurring based on camera metadata, such as depth maps or focal information. However, most images
+            available online lack this metadata, limiting the applicability of such methods.
+
+            Our goal is to explore whether we can replicate this perceptual enhancement—selectively sharpening and
+            blurring image regions—without requiring explicit depth information. By leveraging pre-trained
+            attention-based models, such as Vision Transformers (ViTs), we aim to identify which regions of an image are
+            most semantically important. We will then apply targeted image processing techniques, such as sharpening or
+            Gaussian blurring, to guide visual attention in a way that aligns with human perceptual priorities.</p>
     </section>
 
     <section id="goals">
-      <h2>Goals and Deliverables</h2>
-      <div class="subsection">
-        <h3>Planned Deliverables</h3>
-        <p>[What you expect to successfully complete: images, demos, performance metrics, etc.]</p>
-      </div>
-      <div class="subsection">
-        <h3>Hoped-for Deliverables</h3>
-        <p>[Aspirational outcomes if things go well: stretch goals or advanced features.]</p>
-      </div>
+        <h2>Goals and Deliverables</h2>
+        <div class="subsection">
+            <h3>Planned Deliverables</h3>
+            <p>We plan to deliver a number of images from different domains showcasing how a generic, ML-based,
+                depth-of-field model could enhance existing images. We would like to create a wide range of images and
+                identify domains where this approach does prove beneficial.</p>
+        </div>
+        <div class="subsection">
+            <h3>Hoped-for Deliverables</h3>
+            <p>If things go well, we would love to apply this approach to a short video clip to showcase attention with
+                respect to timing and a larger scene.</p>
+        </div>
     </section>
 
     <section id="schedule">
-      <h2>Schedule</h2>
-      <ul>
-        <li><strong>Week 1:</strong> [Task descriptions]</li>
-        <li><strong>Week 2:</strong> [Task descriptions]</li>
-        <li><strong>Week 3:</strong> [Task descriptions]</li>
-        <li><strong>Week 4:</strong> [Task descriptions]</li>
-      </ul>
+        <h2>Schedule</h2>
+        <ul>
+            <li><strong>Week 1:</strong> Over the first week we want to identify the pre-trained models that we plan to
+                use and we want to build a simple visual pipeline to process images.
+            </li>
+            <li><strong>Week 2:</strong> Over the second week we want to strengthen our pipeline and process a wide
+                variety of images. Ideally we would create some hierarchy of models so that we can adjust which model we
+                are using based on the image domain.
+            </li>
+            <li><strong>Week 3:</strong> Over the third week we want to finalize our project and create our final image
+                deliverables
+            </li>
+            <li><strong>Week 4:</strong> Over the fourth week we want to ideally render out a full scene using our model
+                and add some type of temporal attention map.
+            </li>
+        </ul>
     </section>
 
     <section id="resources">
-      <h2>Resources</h2>
-      <p><strong>References:</strong> [Books, papers, websites]</p>
-      <p><strong>Platform & Tools:</strong> [Programming languages, frameworks, hardware, etc.]</p>
-      <p><strong>Existing Code:</strong> [Links or descriptions of any base code used]</p>
+        <h2>Resources</h2>
+        <p><strong>References:</strong> [Books, papers, websites]</p>
+        <p><strong>Platform & Tools:</strong> [Programming languages, frameworks, hardware, etc.]</p>
+        <p><strong>Existing Code:</strong> [Links or descriptions of any base code used]</p>
     </section>
-  </main>
+</main>
 
-  <footer>
+<footer>
     <p>CS184/284A – University of California, Berkeley</p>
     <p style="margin-top: 0.8rem; font-size: 0.85rem; color: #00ff88; border-top: 1px solid #333; padding-top: 0.5rem;">
-      ⚙️ Website template designed with the assistance of <strong>ChatGPT by OpenAI</strong>.
+        ⚙️ Website template designed with the assistance of <strong>ChatGPT by OpenAI</strong>.
     </p>
-  </footer>
+</footer>
 
 </body>
 </html></html>
