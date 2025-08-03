@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Transformer-Powered Perceptual Assistant – CS184 Project Proposal</title>
+    <title>ML-Guided MIS and Adaptive Sampling – CS184 Final Project</title>
     <style>
         :root {
             --bg-color: #121212;
             --surface-color: #1e1e1e;
-            --accent-color: #00ff88; /* coder green */
+            --accent-color: #00ff88;
             --text-color: #f1f1f1;
             --muted-color: #aaaaaa;
-            --highlight: #c5a739; /* tech teal */
+            --highlight: #c5a739;
             --border-radius: 10px;
         }
 
@@ -37,7 +37,7 @@
         }
 
         header h1 {
-            font-size: 2.8rem;
+            font-size: 2.6rem;
             color: var(--accent-color);
             margin-bottom: 0.5rem;
         }
@@ -59,11 +59,6 @@
             margin-bottom: 2rem;
             border-radius: var(--border-radius);
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-            transition: background-color 0.3s ease;
-        }
-
-        section:hover {
-            background-color: #2a2a2a;
         }
 
         section h2 {
@@ -74,11 +69,9 @@
             color: var(--highlight);
         }
 
-        section h3 {
-            font-size: 1.1rem;
-            margin-top: 1rem;
-            margin-bottom: 0.5rem;
+        .subsection h3 {
             color: var(--accent-color);
+            margin-top: 1rem;
         }
 
         ul {
@@ -89,15 +82,6 @@
             margin-bottom: 0.5rem;
         }
 
-        a {
-            color: var(--highlight);
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
         footer {
             text-align: center;
             font-size: 0.9rem;
@@ -105,101 +89,80 @@
             color: var(--muted-color);
         }
 
-        footer p:last-child {
-            font-size: 0.8rem;
-            margin-top: 0.5rem;
-            color: #666;
-        }
-
-        .subsection {
-            margin-top: 1rem;
-        }
-
         .top-image {
             display: block;
             max-width: 100%;
-            height: auto;
             margin: 2rem auto;
             border-radius: var(--border-radius);
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
-        }
-
-        @media (max-width: 600px) {
-            header h1 {
-                font-size: 2rem;
-            }
-
-            section h2 {
-                font-size: 1.3rem;
-            }
         }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>Transformer-Powered Perceptual Assistant</h1>
+    <h1>ML-Guided MIS and Adaptive Sampling</h1>
     <p>A CS184 Final Project Proposal</p>
 </header>
 
-<!-- AI Attribution prominently at the top -->
 <div style="text-align: center; margin: 1.5rem auto; max-width: 900px; color: #00ff88; font-size: 0.9rem; border-bottom: 1px solid #333; padding-bottom: 0.75rem;">
-    ⚠️ This project website was designed with the assistance of <strong>ChatGPT by OpenAI</strong> to help organize, edit and style the content.
+    ⚠️ This project website was designed with the assistance of <strong>ChatGPT by OpenAI</strong> to help organize,
+    edit and style the content.
 </div>
 
 <main>
-    <!-- INSERT IMAGE HERE -->
-    <img src="dog_hybrid_map_50attnclip_1.png" alt="Visual Transformer (ViT) derived saliency maps" class="top-image"/>
-    <img src="dog_centered_hybrid_mask_50attnclip_1.png" alt="Sample output of attention-based image enhancement" class="top-image"/>
-
     <section id="summary">
         <h2>Summary and Team Members</h2>
-        <p><strong>Project Summary:</strong> We want to use pre-trained attention models (the CLIP model from OpenAI) to
-            understand where the salient features are of some images. We then want to build a heatmap of given images
-            and know which areas we need to blur / enhance. We then want to apply the relevant image processing
-            techniques to 'treat' the final image so it is optimized for human perception.</p>
+        <p><strong>Project Summary:</strong> We aim to reduce noise in Monte Carlo path tracing by combining Multiple
+            Importance Sampling (MIS) with ML-guided adaptive sampling. MIS blends light and BSDF sampling strategies
+            using heuristics, while the ML component uses saliency maps to guide adaptive ray allocation to perceptually
+            important image regions. This will enable faster, cleaner rendering in regions that matter most to the human
+            viewer.</p>
         <p><strong>Team Members:</strong> Eduardo Cortes, Yuhe Qin, Zhehao Yang, and Henry Michaelson</p>
     </section>
 
     <section id="problem">
         <h2>Problem Description</h2>
-        <p>Human perception is naturally attuned to focus on semantically important regions of an image—such as faces,
-            gestures, and salient objects—while filtering out less relevant details like background textures. For
-            instance, when viewing a person standing next to a wall, our attention is instinctively drawn to the
-            person's face and body language, not the fine details of the wall. This selective focus is a cognitive
-            adaptation that helps us process visual information more efficiently.</p>
-        <p>Traditional approaches to mimic this behavior in image processing often rely on depth-of-field techniques
-            that apply blurring based on camera metadata, such as depth maps or focal information. However, most images
-            available online lack this metadata, limiting the applicability of such methods.</p>
-        <p>Our goal is to explore whether we can replicate this perceptual enhancement—selectively sharpening and
-            blurring image regions—without requiring explicit depth information. By leveraging pre-trained
-            attention-based models, such as Vision Transformers (ViTs), we aim to identify which regions of an image are
-            most semantically important. We will then apply targeted image processing techniques, such as sharpening or
-            Gaussian blurring, to guide visual attention in a way that aligns with human perceptual priorities.</p>
+        <p>Path tracing produces photorealistic results but suffers from high variance (noise), especially in scenes
+            with complex lighting and materials. Multiple Importance Sampling (MIS) mitigates this by combining BSDF and
+            light sampling, each of which performs better under different conditions. Meanwhile, adaptive sampling
+            dynamically concentrates effort where more samples are needed, often driven by variance or perceptual
+            importance.</p>
+        <p>We propose combining these ideas with a lightweight ML saliency map to drive sample distribution. The
+            intuition is to make semantically important regions (e.g., faces, shiny surfaces, object boundaries)
+            converge faster by both allocating more rays and better balancing sampling strategies using MIS.
+            We will try to ensure that this hybrid system can outperform either MIS or adaptive sampling alone.</p>
     </section>
 
     <section id="goals">
         <h2>Goals and Deliverables</h2>
         <div class="subsection">
             <h3>Planned Deliverables</h3>
-            <p>We plan to deliver a number of images from different domains showcasing how a generic, ML-based,
-                depth-of-field model could enhance existing images. We would like to create a wide range of images and
-                identify domains where this approach proves most beneficial.</p>
+            <ul>
+                <li>Implement essential BSDF sampling functions to be able to represent complex objects</li>
+                <li>Extend path tracing repository and base .dae files with more complicated scenes to render</li>
+                <li>Implement BSDF importance sampling and light sampling</li>
+                <li>Combine them using MIS with power/balance heuristics</li>
+                <li>Implement and incorporate ML models into adaptive sampling to probabilistically send rays to dynamic regions</li>
+                <li>Compare performance against benchmark performance across the multiple strategies that we implemented for a variety of different final images</li>
+            </ul>
         </div>
         <div class="subsection">
             <h3>Hoped-for Deliverables</h3>
-            <p>If things go well, we would love to apply this approach to a short video clip to showcase attention with
-                respect to timing and a larger scene.</p>
+            <ul>
+                <li>Use ML to adaptively shift sampling weight toward BSDF or light based on surface properties</li>
+                <li>Develop visualizations of saliency and sample allocation maps</li>
+            </ul>
         </div>
     </section>
 
     <section id="schedule">
         <h2>Schedule</h2>
         <ul>
-            <li><strong>Week 1:</strong> Identify pre-trained models and build a basic image processing pipeline.</li>
-            <li><strong>Week 2:</strong> Expand pipeline and test on a wide variety of images, possibly selecting models based on image domain.</li>
-            <li><strong>Week 3:</strong> Finalize image results and presentation deliverables.</li>
-            <li><strong>Week 4:</strong> (Stretch Goal) Extend to video: render a full scene with temporal attention effects.</li>
+            <li><strong>Week 1:</strong> Pivot idea from previous solution that was not valid as a final project. Create starter repository across team.</li>
+            <li><strong>Week 2:</strong> Implement BSDF functions, implement simple MIS using assets from Homework 3, create milestone deliverables.</li>
+            <li><strong>Week 3:</strong> Finalize MIS implementation, acquire more complex .dae scenes to render, implement ML driven adaptive sampling, create benchmark of different solutions, and ML integration into MIS (if possible).</li>
+            <li><strong>Week 4:</strong> Cleanup of materials for final presentation on 8/13.</li>
         </ul>
     </section>
 
@@ -207,23 +170,23 @@
         <h2>Resources</h2>
         <p><strong>References:</strong></p>
         <ul>
-            <li><a href="https://huggingface.co/openai/clip-vit-large-patch14" target="_blank">CLIP ViT-Large Patch14 – Hugging Face</a></li>
-            <li><a href="https://openai.com/chatgpt" target="_blank">ChatGPT by OpenAI</a> – used for ideation, editing, and templating support</li>
-            <li><a href="https://arxiv.org/pdf/2103.00020.pdf" target="_blank">CLIP Paper (Radford et al., 2021)</a></li>
+            <li><a href="https://www.pbr-book.org/3ed-2018/Monte_Carlo_Integration/Importance_Sampling" target="_blank">PBRT
+                Book: Importance Sampling and MIS</a></li>
+            <li><a href="https://graphicyan.github.io/2021/04/17/Importance-Sampling/" target="_blank">MIS Blog
+                (Chinese, via translation)</a></li>
+            <li><a href="https://openai.com/research/clip" target="_blank">CLIP by OpenAI (for saliency)</a></li>
         </ul>
-
-        <p><strong>Platform & Tools:</strong></p>
+        <p><strong>Tools & Frameworks:</strong></p>
         <ul>
-            <li>Python, PyTorch, OpenCV for image processing</li>
-            <li>Jupyter Notebooks for experimentation</li>
-            <li>HTML for project website</li>
+            <li>C++ for path tracer extensions</li>
+            <li>PyTorch / OpenCV for saliency maps</li>
+            <li>HTML/CSS for webpage</li>
         </ul>
-
         <p><strong>Code Repository:</strong></p>
         <ul>
-            <li><a href="https://github.com/Hmichaelson/cs-184-final-project-webpage" target="_blank">GitHub – Transformer-Powered Perceptual Assistant</a></li>
+            <li><a href="https://github.com/Hmichaelson/cs-184-final-project-webpage" target="_blank">GitHub – ML-Guided MIS and Adaptive Sampling</a></li>
         </ul>
-        
+
         <p><strong>Public Webpage:</strong></p>
         <ul>
             <li><a href="https://hmichaelson.github.io/cs-184-final-project-webpage/index.html" target="_blank">View Live Project Website</a></li>
