@@ -81,12 +81,13 @@
             color: var(--highlight);
         }
 
-        ul {
+        ul, ol {
             padding-left: 1.5rem;
+            margin-bottom: var(--spacing);
         }
 
         li {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
         }
 
         .prelim-results {
@@ -98,6 +99,7 @@
         .prelim-results td {
             width: 50%;
             padding: 0.5rem;
+            vertical-align: top;
         }
 
         .prelim-results img {
@@ -106,6 +108,17 @@
             border-radius: var(--border-radius);
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
             background-color: #000;
+        }
+
+        figure {
+            margin: 0;
+        }
+
+        figcaption {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--muted-color);
+            text-align: center;
         }
 
         footer {
@@ -123,81 +136,36 @@
 </header>
 <section id="ai_acknowledgement" class="container">
     <h2>AI Acknowledgement</h2>
-    <p>⚠️ This milestone report was created with the assistance of <strong>ChatGPT by OpenAI</strong> to help organize,
-        edit, and style the content.</p>
+    <p>⚠️ This milestone report was created with assistance from <strong>ChatGPT by OpenAI</strong> for organization,
+        editing, and styling.</p>
 </section>
 <main>
     <section id="summary" class="container">
         <h2>1. Summary of Accomplishments</h2>
         <ol>
-            <li>We began by implementing a substantial portion of our original idea in which we would use ViT models
-                (using CLIP pretrained models) to automatically blur sections of 2D images based on predicted importance
-                of the region as determined by the ViT. We later learned that our original idea was not sufficient for
-                a final project because it dealt more with 2D image transformation instead of 3D graphics.
+            <li>Implemented substantial piece of original 2D idea using CLIP’s ViT to blur image regions based on
+                predicted importance; realized this did not involve 3D graphics and pivoted.
             </li>
-            <li>We then had to go and start looking around for new ideas for our project. We ended up adjusting our
-                focus for the final project to have 2 general sections both united by the common goal of improving
-                sampling
-                in path tracing. The first enhancement was implementing Multiple Importance Sampling (MIP) to improve
-                our
-                direct light sampling method for non-diffuse materials. The second enhancement was attempting to use the
-                ViT model to improve on adaptive sampling performance (this idea was suggested by our mentor C.K. Wolfe
-                as a potential project pivot). We took these two ideas and reformatted our project proposal.
+            <li>Pivoted to improving path tracing sampling with two features: Multiple Importance Sampling (MIS) for
+                direct lighting in non-diffuse materials, and ML-guided adaptive sampling driven by ViT saliency as
+                suggested by mentor C.K. Wolfe.
             </li>
-            <li>With our new idea, we began our implementation by setting up a GitHub repo for us to collaborate
-                inside. We also decided to use project 3 as our starter codebase as it had the simple path tracing
-                algorithm implementation that we could build on to implement our two key features for the project.
-            </li>
-            <li>After setting up a repo and obtaining starter code, we turned our attention to the advanced BSDF class.
-                Our MIP implementation would only improve rendering in cases where objects had non-diffuse surfaces.
-                The main idea of the MIP implementation is that instead of only using light importance sampling in our
-                once bounce light estimator, we would incorporate a BSDF light estimator to estimate the light visible
-                that would be of high importance to the BSDF. This takes advantage of the fact that some BSDF's have a
-                very narrow lobe in which they scatter light. Therefore, it was important that we implement said
-                advanced
-                BSDF's. We started with the MirrorBSDF which was fairly straightforward to implement. We had a few bugs
-                with said implementation in which we were not properly setting the PDF and used ChatGPT for assistance
-                in identifying said issue. After this work was completed, we were able to render CBdragon.dae (attached
-                in
-                preliminary results section) as it has a reflective gold surface. We then (with the assistance of
-                ChatGPT
-                made implementations of MicrofacetBSDF, RefractionBSDF and GlassBSDF. These implementations were all
-                buggy and caused many hours of debugging to no avail. We were able to get the GlassBSDF working enough
-                so we could render CBspheres.dae and therefore make progress and have a proof of concept for our MIS
+            <li>Set up a GitHub repo and adopted Project 3’s path tracer as our base for implementing MIS and adaptive
                 sampling.
             </li>
-            <li>After we created initial implementations of the advanced BSDF functions, we turned our focus towards
-                the MIS implementation. We hit a bit of a roadblock on MIS because our reference material assumed that
-                in each direct light estimate, we would only send one light importance sample. This made it very
-                straightforward to sample the pdf for light importance sampling which was required to implement the MIS.
-                This was not the case with our starter implementation which sampled each point light (and sent multiple
-                samples for each area light). Therefore, we had to figure out that we had to average all the pdf's
-                from each light sample together so we could get an accurate overall light pdf value. We also had
-                to implement the BSDF sampling inside the direct light estimator. This took a lot of
-                trial and error and our initial implementation had a few bugs in it. ChatGPT was useful in helping us
-                identify and fix said bugs.
+            <li>Initial implementation of advanced BSDFs (Mirror, Microfacet, Refraction, Glass). ChatGPT assisted with
+                the implementation and debugging of advanced BSDF functions. After implementing, rendered CBdragon.dae
+                with MirrorBSDF.
             </li>
-            <li>After this, we found that the CBspheres.dae was showing improved results when the MIS was implemented.
-                We noticed that prior to our implementation, the light source was not being directly reflected on the
-                surface of the ball in the back of the image. After we implemented MIS we noticed that this was fixed
-                and
-                that the light source was appearing on the surface of further back ball. This was what we were
-                hoping to see and we were very pleased!
+            <li>Integrated MIS into the direct-light estimator, adjusted reference MIS solution to address PDF mixing
+                across multiple lights and adding a BSDF-sampling branch; debugged heavily with ChatGPT assistance.
             </li>
-            <li>Next up we wanted to render some scenes not in our initial .dae starter pack so we could
-                continue to demonstrate the importance of our new implementation. We downloaded a few models off
-                of several free-to-use sites and tried to import them into Blender so we could output .dae models. This
-                did not work and caused considerable headache as each model failed to meet the requirements of the path
-                tracer starter code. Specifically, said imported models were thought to be non-manifold. We downloaded
-                MeshLab and tried to use that to fix the manifold properties of the downloaded images to no avail.
+            <li>Validated MIS by observing proper specular reflection on the rear sphere in CBspheres.dae, confirming
+                improved performance.
             </li>
-            <li>We then had the insight that the starter .dae files did render, so why not put them into Blender and
-                manipulate them to be able to create the types of scenes for the MIS to shine. We got stuck in the
-                Blender interface as it is challenging to use and understand. That said, we did create a result dae file
-                combining the CBempty.dae box with the bunny.dae and did edit the bunny.dae's material properties.
-                We were able to clean up the mesh and successfully import it into the path tracer. However, whenever we
-                render said image we get a completely black screen. This means that we have more work to do on
-                generating new .dae files, however, we are making progress!
+            <li>Attempted to import custom .dae models (e.g., bunny + Cornell Box, and models downloaded from free
+                sources online); faced manifold issues in Blender/MeshLab and currently render black, indicating further
+                mesh and exporter work is needed.
             </li>
         </ol>
     </section>
@@ -228,7 +196,7 @@
                 <td>
                     <figure>
                         <img src="dragon_sampling.png" alt="Adaptive sampling heatmap CBdragon">
-                        <figcaption>Adaptive sampling heatmap for CBdragon.dae.</figcaption>
+                        <figcaption>Adaptive sampling map for CBdragon.dae.</figcaption>
                     </figure>
                 </td>
             </tr>
@@ -249,8 +217,8 @@
             <tr>
                 <td colspan="2">
                     <figure>
-                        <img src="new_dae.png" alt="Custom bunny + CBempty rendering">
-                        <figcaption>Custom bunny.dae + CBempty.dae with adjusted camera in Blender (currently rendering black).</figcaption>
+                        <img src="new_dae.png" alt="Custom bunny + Cornell Box rendering">
+                        <figcaption>Custom (bunny + CBempty).dae (currently rendering black).</figcaption>
                     </figure>
                 </td>
             </tr>
@@ -258,35 +226,26 @@
     </section>
     <section id="reflection" class="container">
         <h2>3. Reflection on Progress</h2>
-        <p>This has definitely been tough to go from Homework 3 and then have to pivot and execute on our final project
-            during the same week that we have an exam. That being said, we are pleased that we were able to settle on a
-            new idea and that we were able to have a starter implementation that does already show an improvement in
-            path tracing performance. We also feel as if we have made good strides on many of the other major areas of
-            this
-            project (i.e. implementing the other advanced BSDF functions successfully, creating images which show the
-            extent of improvements in MIS sampling vs naive importance sampling of lights). We still have work to do
-            on the adaptive sampling piece of this assignment, but we feel as if we have made good progress so on a
-            pretty quick timeline.</p>
+        <p>Balancing Homework 3, final project pivot, and an exam week has been challenging. We successfully pivoted and
+            built a prototype showing MIS improvements, and have groundwork laid for the rest of the project. Major BSDF
+            and MIS components are implemented (although BSDF is very buggy for everything except MirrorBSDF); remaining
+            work focuses on completing adaptive sampling and asset creation.</p>
     </section>
     <section id="plan" class="container">
         <h2>4. Updated Work Plan</h2>
         <ol>
-            <li><strong>Week 1:</strong> Pivot idea from previous solution that was not valid as a final project. Create
-                starter repository across team. (Done)
-            </li>
-            <li><strong>Week 2:</strong> Implement BSDF functions, implement simple MIS using assets from Homework 3,
-                create milestone deliverables. (Done, but with buggy BSDF functions)
-            </li>
-            <li><strong>Week 3:</strong>
+            <li><strong>Week 1:</strong> Pivot project and set up repository. <em>(Completed)</em></li>
+            <li><strong>Week 2:</strong> Implement BSDFs and basic MIS; prepare milestone. <em>(Completed, BSDFs
+                debugging ongoing)</em></li>
+            <li><strong>Week 3:</strong>
                 <ol>
-                    <li>Finalize MIS implementation (mostly done)</li>
-                    <li>Fix BSDF bugs and make sure microfacet, refraction and glass BSDF functions are working</li>
-                    <li>Implement ML driven adaptive sampling</li>
-                    <li>Create benchmark of different solutions (and a repo of scenes that only work with MIS sampling)</li>
-                    <li>Acquire more complex .dae scenes to render (if possible)</li>
+                    <li>Finalize MIS integration and BSDF fixes</li>
+                    <li>Implement ML-driven adaptive sampling</li>
+                    <li>Create or fix complex .dae assets for testing</li>
+                    <li>Benchmark strategies and assemble scene repo to showcase improvements</li>
                 </ol>
             </li>
-            <li><strong>Week 4:</strong> Cleanup of materials for final presentation on 8/13.</li>
+            <li><strong>Week 4:</strong> Finalize adaptive sampling, polish visuals, and prepare presentation.</li>
         </ol>
     </section>
     <section id="video" class="container">
