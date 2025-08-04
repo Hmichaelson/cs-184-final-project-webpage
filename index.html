@@ -1,88 +1,186 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-	<style>
-			h1 {
-				text-align: center;
-			}
-
-			.container {
-				margin: 0 auto;
-				padding: 60px 20%;
-			}
-
-			figure {
-				text-align: center;
-			}
-
-			img {
-				display: inline-block;
-			}
-
-			body {
-				font-family: 'Inter', sans-serif;
-				line-height: 1.4;
-				color: #32323a;
-				background-color: #ffffff;
-				display: flex;
-				flex-direction: column;
-				justify-content: center;
-				align-items: center;
-				width: 40%;
-				height: 100%;
-				margin: 0;
-				position: absolute;
-				left: 50%;
-				transform: translateX(-50%);
-			}
-
-		@media (max-width: 600px) {
-			body {
-				width: 100%;
-				left: 0;
-				transform: none;
-			}
-		}
-
-		a {
-			text-decoration: none;
-			color: #0057A8;
-		}
-
-		a:hover {
-			color: #8E018E !important;
-			text-decoration: underline;
-		}
-	</style>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CS184/284A Homework Webpages</title>
-	</head>
-	<body>
-		<div class="wrapper">
-			<header>
-				<h1 style="align-self:flex-end;">CS184/284A Homework Webpages</h1>
-			</header>
-			<main>
-				<div class="content">
-					<ul>
-						<li><a href="/hw1/index.html">Homework 1</a></li>
-						<li><a href="/hw2/index.html">Homework 2</a></li>
-						<li><a href="/hw3/index.html">Homework 3</a></li>
-					</ul>
-				</div>
-			</main>
-		</div>
-	</body>
-	<script>
-		var links = document.body.getElementsByTagName("a")
-		var a = window.location.href.indexOf(".io")
-		var repo_name = window.location.href.substring(a+3)
-		for(var i = 0; i < links.length; i++){
-			var link = links[i]
-			var actual_name = link.href.substring(link.href.indexOf(".io")+4)
-			link.href = repo_name + actual_name
-		}
-	</script>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CS184/284A Final Project</title>
+  <style>
+    :root {
+      --bg-color: #121212;
+      --surface-color: #1e1e1e;
+      --accent-color: #00ff88;
+      --text-color: #f1f1f1;
+      --muted-color: #aaaaaa;
+      --highlight: #c5a739;
+      --border-radius: 10px;
+      --max-width: 900px;
+      --spacing: 1.5rem;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      padding-bottom: 3rem;
+    }
+    header {
+      background: linear-gradient(135deg, #263238, #1c1c1c);
+      padding: 3rem 1.5rem;
+      text-align: center;
+      border-bottom: 2px solid #333;
+    }
+    header h1 {
+      font-size: 2.6rem;
+      color: var(--accent-color);
+      margin-bottom: 0.5rem;
+    }
+    header p {
+      font-size: 1.1rem;
+      color: var(--muted-color);
+    }
+    nav {
+      background-color: var(--surface-color);
+      padding: 0.5rem 1.5rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: var(--spacing);
+    }
+    nav a {
+      text-decoration: none;
+      font-weight: 600;
+      color: var(--text-color);
+      padding: 0.5rem 1rem;
+      border-radius: var(--border-radius);
+      transition: background-color 0.3s;
+    }
+    nav a:hover {
+      background-color: var(--accent-color);
+      color: #121212;
+    }
+    main {
+      max-width: var(--max-width);
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+    .infos {
+      text-align: center;
+      margin: 1.5rem auto;
+      max-width: var(--max-width);
+      color: var(--accent-color);
+      font-size: 0.9rem;
+      border-bottom: 1px solid #333;
+      padding-bottom: 0.75rem;
+    }
+    .container {
+      background-color: var(--surface-color);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      border-radius: var(--border-radius);
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    }
+    section h2 {
+      border-left: 4px solid var(--accent-color);
+      padding-left: 1rem;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--highlight);
+    }
+    .subsection h3 {
+      color: var(--accent-color);
+      margin-top: 1rem;
+    }
+    ul { padding-left: 1.5rem; }
+    li { margin-bottom: 0.5rem; }
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      padding-top: 2rem;
+      color: var(--muted-color);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>ML-Guided MIS & Adaptive Sampling</h1>
+    <p>CS184/284A Final Project</p>
+  </header>
+  <nav>
+    <ul>
+      <li><a href="/proposal/index.html">Proposal</a></li>
+      <li><a href="/milestone/index.html">Milestone</a></li>
+      <li><a href="/final_materials/index.html">Final Project</a></li>
+    </ul>
+  </nav>
+  <div class="infos">
+    ⚠️ This site styling was generated with ChatGPT by OpenAI
+  </div>
+  <main>
+    <section id="summary" class="container">
+      <h2>Summary & Team</h2>
+      <p><strong>Project:</strong> Combine Multiple Importance Sampling with ML-driven adaptive sampling to reduce noise in path tracing by focusing rays on perceptually important regions.</p>
+      <p><strong>Team:</strong> Eduardo Cortes, Yuhe Qin, Zhehao Yang, Henry Michaelson</p>
+    </section>
+    <section id="problem" class="container">
+      <h2>Problem Description</h2>
+      <p>Path tracing noise persists in scenes with complex lighting. MIS balances light and BSDF sampling, while adaptive sampling targets high-variance areas. We propose using ML saliency to guide both sample allocation and MIS weights for faster convergence.</p>
+    </section>
+    <section id="goals" class="container">
+      <h2>Goals & Deliverables</h2>
+      <div class="subsection">
+        <h3>Planned</h3>
+        <ul>
+          <li>Implement BSDF and light sampling</li>
+          <li>Integrate MIS with power/balance heuristics</li>
+          <li>Develop ML-driven adaptive sampling</li>
+          <li>Benchmark across strategies</li>
+        </ul>
+      </div>
+      <div class="subsection">
+        <h3>Stretch</h3>
+        <ul>
+          <li>Complex scene extensions</li>
+          <li>Dynamic MIS weight adjustments via ML</li>
+          <li>Visualize saliency & sampling maps</li>
+        </ul>
+      </div>
+    </section>
+    <section id="schedule" class="container">
+      <h2>Schedule</h2>
+      <ul>
+        <li><strong>Week 1:</strong> Repo setup & proposal</li>
+        <li><strong>Week 2:</strong> BSDF, MIS, milestone</li>
+        <li><strong>Week 3:</strong> ML adaptive sampling & benchmarks</li>
+        <li><strong>Week 4:</strong> Finalization & presentation prep</li>
+      </ul>
+    </section>
+    <section id="resources" class="container">
+      <h2>Resources</h2>
+      <p><strong>Refs:</strong></p>
+      <ul>
+        <li><a href="https://www.pbr-book.org/3ed-2018/Monte_Carlo_Integration/Importance_Sampling" target="_blank">PBRT MIS Chapter</a></li>
+        <li><a href="https://openai.com/research/clip" target="_blank">OpenAI CLIP</a></li>
+      </ul>
+      <p><strong>Tools:</strong></p>
+      <ul>
+        <li>C++ Path Tracer</li>
+        <li>PyTorch / OpenCV</li>
+        <li>HTML/CSS</li>
+      </ul>
+      <p><strong>Repo:</strong> <a href="https://github.com/Hmichaelson/cs-184-final-project-webpage" target="_blank">GitHub</a></p>
+      <p><strong>Live:</strong> <a href="https://hmichaelson.github.io/cs-184-final-project-webpage/index.html" target="_blank">Project Site</a></p>
+    </section>
+      <section id="ai_acknowledgement" class="container">
+      <h2>AI Acknowledgement</h2>
+      <p>⚠️ This project write-up and site styling were created with the assistance of <strong>ChatGPT by OpenAI</strong> to help organize, edit, and style the content.</p>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2025 CS184/284A, UC Berkeley</p>
+  </footer>
+</body>
 </html>
