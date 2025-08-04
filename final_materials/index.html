@@ -1,202 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>ML-Guided MIS and Adaptive Sampling – CS184 Final Project</title>
-    <style>
-        :root {
-            --bg-color: #121212;
-            --surface-color: #1e1e1e;
-            --accent-color: #00ff88;
-            --text-color: #f1f1f1;
-            --muted-color: #aaaaaa;
-            --highlight: #c5a739;
-            --border-radius: 10px;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            padding-bottom: 3rem;
-        }
-
-        header {
-            background: linear-gradient(135deg, #263238, #1c1c1c);
-            padding: 3rem 1.5rem;
-            text-align: center;
-            border-bottom: 2px solid #333;
-        }
-
-        header h1 {
-            font-size: 2.6rem;
-            color: var(--accent-color);
-            margin-bottom: 0.5rem;
-        }
-
-        header p {
-            font-size: 1.1rem;
-            color: var(--muted-color);
-        }
-
-        main {
-            max-width: 900px;
-            margin: 2rem auto;
-            padding: 0 1.5rem;
-        }
-
-        section {
-            background-color: var(--surface-color);
-            padding: 2rem;
-            margin-bottom: 2rem;
-            border-radius: var(--border-radius);
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-        }
-
-        section h2 {
-            border-left: 4px solid var(--accent-color);
-            padding-left: 1rem;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--highlight);
-        }
-
-        .subsection h3 {
-            color: var(--accent-color);
-            margin-top: 1rem;
-        }
-
-        ul {
-            padding-left: 1.5rem;
-        }
-
-        li {
-            margin-bottom: 0.5rem;
-        }
-
-        footer {
-            text-align: center;
-            font-size: 0.9rem;
-            padding-top: 2rem;
-            color: var(--muted-color);
-        }
-
-        .top-image {
-            display: block;
-            max-width: 100%;
-            margin: 2rem auto;
-            border-radius: var(--border-radius);
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Final Project - Under Construction</title>
+  <style>
+    :root {
+      --bg-color: #121212;
+      --text-color: #f1f1f1;
+      --accent-color: #00ff88;
+      --font: 'Segoe UI', sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: var(--font);
+    }
+    .message {
+      text-align: center;
+      font-size: 2rem;
+      color: var(--accent-color);
+    }
+  </style>
 </head>
 <body>
-
-<header>
-    <h1>ML-Guided MIS and Adaptive Sampling</h1>
-    <p>A CS184 Final Project Proposal</p>
-</header>
-
-<div style="text-align: center; margin: 1.5rem auto; max-width: 900px; color: #00ff88; font-size: 0.9rem; border-bottom: 1px solid #333; padding-bottom: 0.75rem;">
-    ⚠️ This project website was designed with the assistance of <strong>ChatGPT by OpenAI</strong> to help organize,
-    edit and style the content.
-</div>
-
-<main>
-    <section id="summary">
-        <h2>Summary and Team Members</h2>
-        <p><strong>Project Summary:</strong> We aim to reduce noise in Monte Carlo path tracing by combining Multiple
-            Importance Sampling (MIS) with ML-guided adaptive sampling. MIS blends light and BSDF sampling strategies
-            using heuristics, while the ML component uses saliency maps to guide adaptive ray allocation to perceptually
-            important image regions. This will enable faster, cleaner rendering in regions that matter most to the human
-            viewer.</p>
-        <p><strong>Team Members:</strong> Eduardo Cortes, Yuhe Qin, Zhehao Yang, and Henry Michaelson</p>
-    </section>
-
-    <section id="problem">
-        <h2>Problem Description</h2>
-        <p>Path tracing produces photorealistic results but suffers from high variance (noise), especially in scenes
-            with complex lighting and materials. Multiple Importance Sampling (MIS) mitigates this by combining BSDF and
-            light sampling, each of which performs better under different conditions. Meanwhile, adaptive sampling
-            dynamically concentrates effort where more samples are needed, often driven by variance or perceptual
-            importance.</p>
-        <p>We propose combining these ideas with a lightweight ML saliency map to drive sample distribution. The
-            intuition is to make semantically important regions (e.g., faces, shiny surfaces, object boundaries)
-            converge faster by both allocating more rays and better balancing sampling strategies using MIS.
-            We will try to ensure that this hybrid system can outperform either MIS or adaptive sampling alone.</p>
-    </section>
-
-    <section id="goals">
-        <h2>Goals and Deliverables</h2>
-        <div class="subsection">
-            <h3>Planned Deliverables</h3>
-            <ul>
-                <li>Implement essential BSDF sampling functions to be able to represent complex objects</li>
-                <li>Implement BSDF importance sampling and light sampling</li>
-                <li>Combine them using MIS with power/balance heuristics</li>
-                <li>Implement and incorporate ML models into adaptive sampling to probabilistically send rays to dynamic regions</li>
-                <li>Compare performance against benchmark performance across the multiple strategies that we implemented for a variety of different final images</li>
-            </ul>
-        </div>
-        <div class="subsection">
-            <h3>Hoped-for Deliverables</h3>
-            <ul>
-                <li>Extend path tracing repository and base .dae files with more complicated scenes to render</li>
-                <li>Use ML to adaptively shift sampling weight toward BSDF or light based on surface properties</li>
-                <li>Develop visualizations of saliency and sample allocation maps</li>
-            </ul>
-        </div>
-    </section>
-
-    <section id="schedule">
-        <h2>Schedule</h2>
-        <ul>
-            <li><strong>Week 1:</strong> Pivot idea from previous solution that was not valid as a final project. Create starter repository across team.</li>
-            <li><strong>Week 2:</strong> Implement BSDF functions, implement simple MIS using assets from Homework 3, create milestone deliverables.</li>
-            <li><strong>Week 3:</strong> Finalize MIS implementation, implement ML driven adaptive sampling, create benchmark of different solutions, acquire more complex .dae scenes to render (if possible), and ML integration into MIS (if possible).</li>
-            <li><strong>Week 4:</strong> Cleanup of materials for final presentation on 8/13.</li>
-        </ul>
-    </section>
-
-    <section id="resources">
-        <h2>Resources</h2>
-        <p><strong>References:</strong></p>
-        <ul>
-            <li><a href="https://www.pbr-book.org/3ed-2018/Monte_Carlo_Integration/Importance_Sampling" target="_blank">PBRT
-                Book: Importance Sampling and MIS</a></li>
-            <li><a href="https://graphicyan.github.io/2021/04/17/Importance-Sampling/" target="_blank">MIS Blog
-                (Chinese, via translation)</a></li>
-            <li><a href="https://openai.com/research/clip" target="_blank">CLIP by OpenAI (for saliency)</a></li>
-        </ul>
-        <p><strong>Tools & Frameworks:</strong></p>
-        <ul>
-            <li>C++ for path tracer extensions</li>
-            <li>PyTorch / OpenCV for saliency maps</li>
-            <li>HTML/CSS for webpage</li>
-        </ul>
-        <p><strong>Code Repository:</strong></p>
-        <ul>
-            <li><a href="https://github.com/Hmichaelson/cs-184-final-project-webpage" target="_blank">GitHub – ML-Guided MIS and Adaptive Sampling</a></li>
-        </ul>
-
-        <p><strong>Public Webpage:</strong></p>
-        <ul>
-            <li><a href="https://hmichaelson.github.io/cs-184-final-project-webpage/index.html" target="_blank">View Live Project Website</a></li>
-        </ul>
-    </section>
-</main>
-
-<footer>
-    <p>CS184/284A – University of California, Berkeley</p>
-</footer>
-
+  <div class="message">TBD - still under construction</div>
 </body>
 </html>
