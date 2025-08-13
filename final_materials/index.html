@@ -196,6 +196,13 @@
     </p>
 </section>
 
+<section id="slides" class="container">
+    <h2>Project Slides</h2>
+    <p>
+        <a href="https://docs.google.com/presentation/d/1e5vjsgep_5mhzLQqGijvfYpUiQ3aPC5hliOyJ_nt04g/edit?usp=sharing" target="_blank" rel="noopener">https://docs.google.com/presentation/d/1e5vjsgep_5mhzLQqGijvfYpUiQ3aPC5hliOyJ_nt04g/edit</a>
+    </p>
+</section>
+
 <main>
     <section id="abstract" class="container">
         <h2>Abstract</h2>
@@ -485,6 +492,16 @@
         </p>
         <br>
 
+        <pre><code class="language-cpp">
+        // For delta-distribution materials, adjust MIS weights to improve reflection results
+        if (isect.bsdf-&gt;is_delta()) {
+            // Increase BSDF sampling weight, reduce light sampling to mitigate fireflies
+            double weight_bsdf = 0.8;
+            double weight_light = 0.2;
+            return L_out_lighting_sample * weight_light + L_out_bsdf_sample * weight_bsdf;
+        }
+        </code></pre>
+
         <h3>Challenge 3: Using an Imperfect Saliency Map Without Hurting Adaptive Sampling</h3>
         <p>
             Our ViT-based saliency is <em>imperfect</em>: it can miss specular effects (caustics, glossy lobes),
@@ -531,18 +548,6 @@
         <p><strong>Outcome.</strong> This simpler integration preserved most of the performance benefit without slowing
             down the render loop. In our tests, it consistently reduced wasted samples on low-detail areas while
             maintaining image quality for challenging regions like glass and metal.</p>
-
-
-        <pre><code class="language-cpp">
-// For delta-distribution materials, adjust MIS weights to improve reflection results
-if (isect.bsdf-&gt;is_delta()) {
-    // Increase BSDF sampling weight, reduce light sampling to mitigate fireflies
-    double weight_bsdf = 0.8;
-    double weight_light = 0.2;
-    return L_out_lighting_sample * weight_light + L_out_bsdf_sample * weight_bsdf;
-}
-</code></pre>
-
 
     </section>
 
@@ -623,13 +628,13 @@ if (isect.bsdf-&gt;is_delta()) {
             We compare baseline adaptive sampling (with MIS) against our <strong>ViT Saliency-Biased Adaptive Sampling
             (SBAS)</strong>.
             For each scene we show: the rendered image, per-pixel sampling rate heatmap (<em>_rate</em>), and the
-            saliency map &amp; mask used to guide sampling.
+            saliency map &amp; mask used to guide sampling. We account 40 seconds for creating the saliency map from a quick 2spp rendering in our time comparisons.
         </p>
 
         <!-- ===== CBdragon ===== -->
         <h3>CBdragon — Gold Microfacet Dragon in a Cornell Box (4096 spp)</h3>
         <p class="inline-note">
-            Expect SBAS to concentrate samples on high-frequency geometry (spines, face) and bright specular regions,
+            SBAS concentrates samples on high-frequency geometry (spines, face) and bright specular regions,
             while de-emphasizing flat background.
         </p>
 
@@ -666,20 +671,20 @@ if (isect.bsdf-&gt;is_delta()) {
                 <td>
                     <figure>
                         <img src="CBdragon_saliency_map.png" alt="CBdragon saliency map">
-                        <figcaption>Saliency map (continuous)</figcaption>
+                        <figcaption>Saliency map</figcaption>
                     </figure>
                 </td>
                 <td>
                     <figure>
                         <img src="CBdragon_saliency_mask.png" alt="CBdragon saliency mask">
-                        <figcaption>Saliency mask (thresholded)</figcaption>
+                        <figcaption>Saliency mask</figcaption>
                     </figure>
                 </td>
             </tr>
         </table>
 
         <details style="margin-top: .75rem;">
-            <summary><strong>Timing &amp; quality (fill these after measuring)</strong></summary>
+            <summary><strong>Timing &amp; quality</strong></summary>
             <ul style="margin-top:.75rem;">
                 <li><strong>Baseline time (4096 spp):</strong> <code>3693.3846</code> s</li>
                 <li><strong>SBAS time (4096 spp):</strong> <code>2197.6018 + 40</code> s &nbsp;(<code>165.06%</code>
@@ -697,8 +702,7 @@ if (isect.bsdf-&gt;is_delta()) {
         <!-- ===== CBspheres ===== -->
         <h3>CBspheres — Glass &amp; Metal Spheres in Cornell Box (4096 spp)</h3>
         <p class="inline-note">
-            SBAS emphasizes glass caustics and metal highlights while reducing effort on walls/ceiling. Useful for
-            testing specular transport + MIS.
+            SBAS emphasizes salient areas on the glass and metal spheres while reducing effort on walls/ceiling reflections.
         </p>
 
         <table class="results">
@@ -747,7 +751,7 @@ if (isect.bsdf-&gt;is_delta()) {
         </table>
 
         <details style="margin-top: .75rem;">
-            <summary><strong>Timing &amp; quality (fill these after measuring)</strong></summary>
+            <summary><strong>Timing &amp; quality</strong></summary>
             <ul style="margin-top:.75rem;">
                 <li><strong>Baseline time (4096 spp):</strong> <code>1122.1510</code> s</li>
                 <li><strong>SBAS time (4096 spp):</strong> <code>443.9791 + 40</code> s &nbsp;(<code>231.86%</code>
